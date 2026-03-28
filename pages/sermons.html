@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sermons - Heavenly Glory Revelation Ministries</title>
+    <meta name="description" content="Watch and listen to powerful sermons from Heavenly Glory Revelation Ministries">
+    <meta name="keywords" content="sermons, preaching, bible teaching, worship service">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../Assets/images/favicon.ico">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="../Assets/images/logo.jpg" alt="Heavenly Glory Revelation Ministries">
+                <span>Heavenly Glory Revelation Ministries</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="sermons.html" class="active">Sermons</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Sermons & Messages</h1>
+            <p>Powerful biblical teaching to inspire, challenge, and transform your life through God's Word</p>
+        </div>
+    </section>
+
+    <!-- YouTube Videos Section (replaces static sermons) -->
+    <section class="sermons-section">
+        <div class="container">
+            <h2 class="section-title">Latest Sermons</h2>
+            <div class="filter-buttons" style="text-align: center; margin-bottom: 2rem;">
+                <button class="cta-button" onclick="filterYouTubeVideos('all')" style="background: var(--primary-color);">All Videos</button>
+                <button class="cta-button" onclick="filterYouTubeVideos('recent')" style="background: var(--accent-color);">Recent</button>
+                <button class="cta-button" onclick="filterYouTubeVideos('series')" style="background: var(--secondary-color);">Series</button>
+            </div>
+            <div id="youtube-videos" class="sermons-grid">
+                <!-- YouTube videos will be dynamically inserted here -->
+            </div>
+            <div id="youtube-loading" style="text-align: center; padding: 2rem; display: none;">
+                <p>Loading latest videos...</p>
+            </div>
+            <div id="youtube-error" style="text-align: center; padding: 2rem; display: none;">
+                <p>Videos unavailable</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Modal (Hidden by default) -->
+    <div id="videoModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; align-items: center; justify-content: center;">
+        <div style="background: white; padding: 2rem; border-radius: 10px; max-width: 800px; width: 90%; position: relative;">
+            <button onclick="closeVideoModal()" style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 2rem; cursor: pointer;">&times;</button>
+            <h3 id="videoTitle" style="margin-bottom: 1rem;"></h3>
+            <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                <iframe id="videoFrame" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" src="" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call to Action Section -->
+    <section class="contact-section">
+        <div class="container">
+            <h2 class="section-title">Join Us This Sunday</h2>
+            <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+                <p>Experience these powerful messages in person and join our community of faith. We'd love to worship with you!</p>
+                <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap;">
+                    <a href="contact.html" class="cta-button">Plan Your Visit</a>
+                    <a href="events.html" class="cta-button" style="background: var(--accent-color);">Service Times</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Heavenly Glory Revelation Ministries</h3>
+                    <p>A place where faith comes alive and spirits are renewed through the revelation of God's heavenly glory.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">f</a>
+                        <a href="#" aria-label="Twitter">𝕏</a>
+                        <a href="#" aria-label="Instagram">📷</a>
+                        <a href="#" aria-label="YouTube">▶</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="sermons.html">Sermons</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p>📍 PP4F+6C Nairobi, Kenya</p>
+                    <p>📞 +254 720 224079</p>
+                    <p>✉️ info@heavenlyglory.org</p>
+                    <p>⏰ Office: Mon-Fri 9AM-5PM</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Service Times</h3>
+                    <p><strong>Sunday:</strong> 8:00 AM & 10:40 AM</p>
+                    <p><strong>TUE & FRI:</strong> 11:00 AM - 4:30 PM</p>
+                    <p><strong>Prayer Meeting:</strong> Daily</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Heavenly Glory Revelation Ministries. All rights reserved.</p>
+                <p>Created with <span style="color: var(--accent-color);">❤</span> by <span style="color: var(--accent-color); text-decoration: none;">Arneil Tech</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../js/script.js"></script>
+    <script>
+        // YouTube API configuration
+        const YOUTUBE_API_KEY = 'AIzaSyBh8IXb4L1OZTOtvqiyPcDMfHgjk85Kosg';
+        const YOUTUBE_CHANNEL_ID = 'UCtUa4bOfjimHwcfZ2SeRm2w';
+        
+        // YouTube Latest Videos functionality
+        async function loadYouTubeVideos() {
+            const container = document.getElementById('youtube-videos');
+            const loading = document.getElementById('youtube-loading');
+            const error = document.getElementById('youtube-error');
+            
+            // Show loading state
+            loading.style.display = 'block';
+            container.innerHTML = '';
+            error.style.display = 'none';
+            
+            try {
+                const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${YOUTUBE_CHANNEL_ID}&maxResults=6&order=date&type=video&key=${YOUTUBE_API_KEY}`;
+                
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error('API request failed');
+                }
+                
+                const data = await response.json();
+                
+                if (data.items && data.items.length > 0) {
+                    displayYouTubeVideos(data.items);
+                } else {
+                    showError();
+                }
+            } catch (err) {
+                showError();
+            } finally {
+                loading.style.display = 'none';
+            }
+        }
+        
+        function displayYouTubeVideos(videos) {
+            const container = document.getElementById('youtube-videos');
+            container.innerHTML = '';
+            
+            videos.forEach(video => {
+                const videoId = video.id.videoId;
+                const title = video.snippet.title;
+                const thumbnail = video.snippet.thumbnails.medium.url;
+                const publishedAt = new Date(video.snippet.publishedAt).toLocaleDateString();
+                
+                const videoCard = document.createElement('div');
+                videoCard.className = 'sermon-card';
+                videoCard.innerHTML = `
+                    <div class="sermon-date">${publishedAt}</div>
+                    <div class="sermon-content">
+                        <div style="margin-bottom: 1rem;">
+                            <img src="${thumbnail}" alt="${title}" style="width: 100%; border-radius: 8px; cursor: pointer;" onclick="window.open('https://www.youtube.com/watch?v=${videoId}', '_blank')">
+                        </div>
+                        <h3 style="margin-bottom: 0.5rem; font-size: 1.1rem; line-height: 1.4;">${title.length > 60 ? title.substring(0, 60) + '...' : title}</h3>
+                        <div style="margin-top: 1rem;">
+                            <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" class="sermon-link">▶️ Watch on YouTube</a>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(videoCard);
+            });
+        }
+        
+        function showError() {
+            document.getElementById('youtube-videos').innerHTML = '';
+            document.getElementById('youtube-error').style.display = 'block';
+        }
+        
+        // Load YouTube videos when page loads
+        document.addEventListener('DOMContentLoaded', loadYouTubeVideos);
+        
+        // YouTube filter functionality
+        function filterYouTubeVideos(category) {
+            const videoCards = document.querySelectorAll('#youtube-videos .sermon-card');
+            
+            videoCards.forEach(card => {
+                const cardCategory = card.getAttribute('data-category');
+                
+                if (category === 'all') {
+                    card.style.display = 'block';
+                    card.classList.add('fade-in');
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+        
+        // Additional sermon page functionality
+        function filterSermons(category) {
+            const sermonCards = document.querySelectorAll('.sermon-card');
+            
+            sermonCards.forEach(card => {
+                const cardCategory = card.getAttribute('data-category');
+                
+                if (category === 'all' || cardCategory === category) {
+                    card.style.display = 'block';
+                    card.classList.add('fade-in');
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function playSermon(sermonId) {
+            const modal = document.getElementById('videoModal');
+            const title = document.getElementById('videoTitle');
+            const frame = document.getElementById('videoFrame');
+            
+            // Set sermon title
+            const sermonTitles = {
+                'sermon1': 'The Revelation of God\'s Glory',
+                'sermon2': 'Walking in Faith',
+                'sermon3': 'The Power of Prayer',
+                'series1': 'Divine Purpose Series - Part 1',
+                'series2': 'Divine Purpose Series - Part 2',
+                'series3': 'Divine Purpose Series - Part 3',
+                'victory1': 'Living in Victory',
+                'fruit1': 'The Fruit of the Spirit',
+                'mind1': 'Renewed Mind, Transformed Life'
+            };
+            
+            title.textContent = sermonTitles[sermonId] || 'Sermon';
+            
+            // For demo purposes, use a sample YouTube video
+            frame.src = 'https://www.youtube.com/embed/dQw4w9WgXcQ';
+            
+            modal.style.display = 'flex';
+        }
+
+        function closeVideoModal() {
+            const modal = document.getElementById('videoModal');
+            const frame = document.getElementById('videoFrame');
+            
+            modal.style.display = 'none';
+            frame.src = '';
+        }
+
+        function downloadSermon(sermonId) {
+            alert('Download feature coming soon! This would allow you to download the audio or video file.');
+        }
+
+        function printSermon(sermonId) {
+            window.print();
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('videoModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeVideoModal();
+            }
+        });
+    </script>
+</body>
+</html>

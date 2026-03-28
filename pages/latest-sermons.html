@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latest Sermons - Heavenly Glory Revelation Ministries</title>
+    <meta name="description" content="Watch and listen to powerful sermons from Heavenly Glory Revelation Ministries">
+    <meta name="keywords" content="sermons, preaching, bible teaching, worship service">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../Assets/images/favicon.ico">
+    
+    <!-- Additional CSS for YouTube Section -->
+    <style>
+        .youtube-section {
+            background: var(--bg-light);
+            padding: 4rem 0;
+        }
+        
+        .youtube-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .youtube-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .youtube-header p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--text-light);
+        }
+        
+        .youtube-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .video-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+        }
+        
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .video-info {
+            padding: 1.5rem;
+        }
+        
+        .video-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+            line-height: 1.4;
+        }
+        
+        .video-date {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .loading-message {
+            text-align: center;
+            padding: 3rem;
+            font-size: 1.1rem;
+            color: var(--text-light);
+        }
+        
+        .error-message {
+            text-align: center;
+            padding: 3rem;
+            background: #f8d7da;
+            color: #721c24;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+        
+        .no-videos {
+            text-align: center;
+            padding: 3rem;
+            background: var(--white);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .no-videos h3 {
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+        
+        .no-videos p {
+            color: var(--text-light);
+        }
+        
+        .api-instructions {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .api-instructions h3 {
+            color: #856404;
+            margin-bottom: 1rem;
+        }
+        
+        .api-instructions ol {
+            color: #856404;
+            margin-left: 1.5rem;
+        }
+        
+        .api-instructions li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .api-instructions code {
+            background: #f8f9fa;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        @media (max-width: 768px) {
+            .youtube-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .youtube-header h2 {
+                font-size: 2rem;
+            }
+            
+            .video-card {
+                margin: 0 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .youtube-section {
+                padding: 2rem 0;
+            }
+            
+            .video-info {
+                padding: 1rem;
+            }
+            
+            .video-title {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Heavenly Glory</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="sermons.html" class="active">Sermons</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Latest Sermons</h1>
+            <p>Watch and be inspired by powerful messages from God's Word</p>
+        </div>
+    </section>
+
+    <!-- YouTube Sermons Section -->
+    <section class="youtube-section">
+        <div class="container">
+            <div class="youtube-header">
+                <h2>Watch Us Online</h2>
+                <p>Stay connected with our latest sermons and worship services. Subscribe to our YouTube channel for regular updates.</p>
+            </div>
+            
+            <!-- API Setup Instructions (Remove once configured) -->
+            <div class="api-instructions" id="apiInstructions">
+                <h3>🔧 Setup Required</h3>
+                <p>To display YouTube videos automatically, follow these steps:</p>
+                <ol>
+                    <li>Get a YouTube Data API Key from <a href="https://console.cloud.google.com/" target="_blank">Google Cloud Console</a></li>
+                    <li>Enable the YouTube Data API v3</li>
+                    <li>Find your Channel ID from <a href="https://www.youtube.com/@MichaelMuriithi-y5u" target="_blank">@MichaelMuriithi-y5u</a></li>
+                    <li>Replace the placeholders in the JavaScript code below</li>
+                </ol>
+                <p><strong>Current Status:</strong> <span id="apiStatus">Using demo videos</span></p>
+            </div>
+            
+            <!-- Loading Message -->
+            <div class="loading-message" id="loadingMessage">
+                Loading latest sermons...
+            </div>
+            
+            <!-- YouTube Video Grid -->
+            <div class="youtube-grid" id="youtubeGrid">
+                <!-- Videos will be dynamically inserted here -->
+            </div>
+            
+            <!-- No Videos Message -->
+            <div class="no-videos" id="noVideos" style="display: none;">
+                <h3>No Videos Available</h3>
+                <p>Check back soon for the latest sermons and worship services.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Heavenly Glory Revelation Ministries</h3>
+                    <p>A place where faith comes alive and spirits are renewed through the revelation of God's heavenly glory.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">f</a>
+                        <a href="#" aria-label="Twitter">𝕏</a>
+                        <a href="#" aria-label="Instagram">📷</a>
+                        <a href="https://www.youtube.com/@MichaelMuriithi-y5u" target="_blank" aria-label="YouTube">▶</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="sermons.html">Sermons</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p>📍 PP4F+6C Nairobi, Kenya</p>
+                    <p>📞 +254 720 224079</p>
+                    <p>✉️ info@heavenlyglory.org</p>
+                    <p>⏰ Office: Mon-Fri 9AM-5PM</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Service Times</h3>
+                    <p><strong>Sunday:</strong> 8:00 AM & 10:40 AM</p>
+                    <p><strong>TUE & FRI:</strong> 11:00 AM - 4:30 PM</p>
+                    <p><strong>Prayer Meeting:</strong> Daily</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Heavenly Glory Revelation Ministries. All rights reserved.</p>
+                <p>Created with <span style="color: var(--accent-color);">❤</span> by <span style="color: var(--accent-color); text-decoration: none;">Arneil Tech</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../js/script.js"></script>
+    <script>
+        // YouTube API Configuration
+        const YOUTUBE_CONFIG = {
+            // 🔑 REPLACE THESE WITH YOUR ACTUAL VALUES
+            API_KEY: 'YOUR_YOUTUBE_API_KEY_HERE', // Get from Google Cloud Console
+            CHANNEL_ID: 'YOUR_CHANNEL_ID_HERE',   // Get from YouTube channel
+            MAX_RESULTS: 6,                        // Number of videos to display
+            
+            // Demo videos (used when API is not configured)
+            DEMO_VIDEOS: [
+                {
+                    videoId: 'dQw4w9WgXcQ',
+                    title: 'Welcome to Heavenly Glory - Sunday Service',
+                    publishedAt: '2024-03-24T10:00:00Z'
+                },
+                {
+                    videoId: 'jNQXAC9IVRw',
+                    title: 'The Power of Prayer - Wednesday Bible Study',
+                    publishedAt: '2024-03-20T19:00:00Z'
+                },
+                {
+                    videoId: '9bZkp7q19f0',
+                    title: 'Living in Faith - Sunday Morning Message',
+                    publishedAt: '2024-03-17T08:00:00Z'
+                }
+            ]
+        };
+
+        // YouTube Sermons Manager
+        class YouTubeSermons {
+            constructor() {
+                this.grid = document.getElementById('youtubeGrid');
+                this.loadingMessage = document.getElementById('loadingMessage');
+                this.noVideos = document.getElementById('noVideos');
+                this.apiInstructions = document.getElementById('apiInstructions');
+                this.apiStatus = document.getElementById('apiStatus');
+                this.isApiConfigured = this.checkApiConfiguration();
+            }
+
+            checkApiConfiguration() {
+                return YOUTUBE_CONFIG.API_KEY !== 'YOUR_YOUTUBE_API_KEY_HERE' && 
+                       YOUTUBE_CONFIG.CHANNEL_ID !== 'YOUR_CHANNEL_ID_HERE';
+            }
+
+            async init() {
+                if (this.isApiConfigured) {
+                    this.apiInstructions.style.display = 'none';
+                    this.apiStatus.textContent = 'API configured - Loading live videos';
+                    await this.loadYouTubeVideos();
+                } else {
+                    this.loadingMessage.style.display = 'none';
+                    this.loadDemoVideos();
+                }
+            }
+
+            async loadYouTubeVideos() {
+                try {
+                    const url = `https://www.googleapis.com/youtube/v3/search?key=${YOUTUBE_CONFIG.API_KEY}&channelId=${YOUTUBE_CONFIG.CHANNEL_ID}&part=snippet,id&order=date&maxResults=${YOUTUBE_CONFIG.MAX_RESULTS}`;
+                    
+                    const response = await fetch(url);
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    
+                    const data = await response.json();
+                    
+                    if (data.items && data.items.length > 0) {
+                        this.displayVideos(data.items);
+                        this.apiStatus.textContent = 'Live videos loaded successfully';
+                    } else {
+                        this.showNoVideos();
+                    }
+                } catch (error) {
+                    console.error('Error fetching YouTube videos:', error);
+                    this.showError('Failed to load videos. Using demo videos instead.');
+                    this.loadDemoVideos();
+                } finally {
+                    this.loadingMessage.style.display = 'none';
+                }
+            }
+
+            loadDemoVideos() {
+                this.displayVideos(YOUTUBE_CONFIG.DEMO_VIDEOS);
+                this.apiStatus.textContent = 'Using demo videos (API not configured)';
+            }
+
+            displayVideos(videos) {
+                this.grid.innerHTML = '';
+                
+                videos.forEach(item => {
+                    const videoId = item.id?.videoId || item.videoId;
+                    const title = item.snippet?.title || item.title;
+                    const publishedAt = item.snippet?.publishedAt || item.publishedAt;
+                    
+                    if (videoId) {
+                        const videoCard = this.createVideoCard(videoId, title, publishedAt);
+                        this.grid.appendChild(videoCard);
+                    }
+                });
+                
+                if (this.grid.children.length === 0) {
+                    this.showNoVideos();
+                }
+            }
+
+            createVideoCard(videoId, title, publishedAt) {
+                const card = document.createElement('div');
+                card.className = 'video-card';
+                
+                const publishDate = new Date(publishedAt).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+                
+                card.innerHTML = `
+                    <div class="video-wrapper">
+                        <iframe 
+                            src="https://www.youtube.com/embed/${videoId}" 
+                            title="${title}"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">${this.truncateTitle(title)}</h3>
+                        <div class="video-date">
+                            📅 ${publishDate}
+                        </div>
+                    </div>
+                `;
+                
+                return card;
+            }
+
+            truncateTitle(title, maxLength = 60) {
+                return title.length > maxLength ? title.substring(0, maxLength) + '...' : title;
+            }
+
+            showNoVideos() {
+                this.loadingMessage.style.display = 'none';
+                this.grid.style.display = 'none';
+                this.noVideos.style.display = 'block';
+            }
+
+            showError(message) {
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'error-message';
+                errorDiv.textContent = message;
+                this.grid.parentNode.insertBefore(errorDiv, this.grid);
+            }
+        }
+
+        // Initialize YouTube Sermons when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            const youtubeSermons = new YouTubeSermons();
+            youtubeSermons.init();
+        });
+
+        // Helper function to get Channel ID (for debugging)
+        async function getChannelId(username) {
+            try {
+                const response = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=id&forUsername=${username}&key=${YOUTUBE_CONFIG.API_KEY}`);
+                const data = await response.json();
+                if (data.items && data.items.length > 0) {
+                    console.log('Channel ID:', data.items[0].id);
+                    return data.items[0].id;
+                }
+            } catch (error) {
+                console.error('Error getting channel ID:', error);
+            }
+            return null;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Connected - Heavenly Glory Revelation Ministries</title>
+    <meta name="description" content="Get connected with Heavenly Glory Revelation Ministries - join groups, volunteer, and grow in faith">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../Assets/images/favicon.ico">
+    
+    <!-- Additional CSS for Get Connected Section -->
+    <style>
+        .get-connected-section {
+            background: var(--bg-light);
+            padding: 4rem 0;
+        }
+        
+        .connected-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .tab-button {
+            padding: 0.75rem 1.5rem;
+            background: var(--white);
+            border: 2px solid var(--accent-color);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        
+        .tab-button:hover,
+        .tab-button.active {
+            background: var(--accent-color);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+        
+        .tab-content {
+            display: none;
+            animation: fadeInUp 0.5s ease;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .connected-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .connected-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--secondary-color);
+        }
+        
+        .connected-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .connected-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .connected-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .newsletter-form {
+            text-align: center;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .newsletter-input-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .newsletter-input-group input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 2px solid var(--accent-color);
+            border-radius: 50px;
+            font-size: 1rem;
+        }
+        
+        .giving-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .giving-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .giving-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .giving-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .newsletter-input-group {
+                flex-direction: column;
+            }
+            
+            .connected-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .tab-button {
+                width: 200px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Heavenly Glory</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="sermons.html">Sermons</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Get Connected</h1>
+            <p>Find your place in our church family and grow in your faith journey</p>
+        </div>
+    </section>
+
+    <!-- Get Connected Section -->
+    <section class="get-connected-section">
+        <div class="container">
+            <h2 class="section-title">Find Your Community</h2>
+            
+            <!-- Tab Navigation -->
+            <div class="connected-tabs">
+                <button class="tab-button active" onclick="showTab('visitor')">👋 Visitor Form</button>
+                <button class="tab-button" onclick="showTab('groups')">👥 Small Groups</button>
+                <button class="tab-button" onclick="showTab('volunteer')">🙌 Volunteer</button>
+                <button class="tab-button" onclick="showTab('newsletter')">📰 Newsletter</button>
+                <button class="tab-button" onclick="showTab('giving')">💳 Giving</button>
+            </div>
+
+            <!-- Visitor Form Tab -->
+            <div id="visitor-tab" class="tab-content active">
+                <div class="connected-form">
+                    <h3>Welcome to Heavenly Glory!</h3>
+                    <p>We're so glad you're here. Fill out this form to let us know you visited and how we can connect with you.</p>
+                    
+                    <form id="visitorForm" style="margin-top: 2rem;">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="visitor-name">Full Name *</label>
+                                <input type="text" id="visitor-name" name="name" required placeholder="Your full name">
+                            </div>
+                            <div class="form-group">
+                                <label for="visitor-email">Email Address *</label>
+                                <input type="email" id="visitor-email" name="email" required placeholder="your.email@example.com">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="visitor-phone">Phone Number</label>
+                                <input type="tel" id="visitor-phone" name="phone" placeholder="+254 700 000 000">
+                            </div>
+                            <div class="form-group">
+                                <label for="first-time">First Time Visiting?</label>
+                                <select id="first-time" name="first-time" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px;">
+                                    <option value="">Select...</option>
+                                    <option value="yes">Yes, first time!</option>
+                                    <option value="no">No, I've been before</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="visitor-message">Message (Optional)</label>
+                            <textarea id="visitor-message" name="message" placeholder="Tell us about your experience or any questions you have..." rows="4"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">Submit Visitor Form</button>
+                    </form>
+                    
+                    <div id="visitor-success" class="success-message">
+                        Thank you for visiting Heavenly Glory! We're excited to connect with you soon.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Small Groups Tab -->
+            <div id="groups-tab" class="tab-content">
+                <h3 style="text-align: center; margin-bottom: 2rem;">Join a Small Group</h3>
+                <p style="text-align: center; max-width: 600px; margin: 0 auto 2rem;">Small groups are the best way to get connected and grow in your faith. Find one that fits your schedule and interests.</p>
+                
+                <div class="connected-grid">
+                    <div class="connected-card">
+                        <div class="connected-icon">👥</div>
+                        <h4>Men's Fellowship</h4>
+                        <p>Biblical brotherhood, accountability, and spiritual growth for men of all ages. We study God's Word and support each other in our faith journey.</p>
+                        <p><strong>When:</strong> Every Sunday, 4:00 PM - 6:30 PM</p>
+                        <p><strong>Where:</strong> Main Sanctuary</p>
+                        <button class="cta-button" onclick="joinGroup('Men\'s Fellowship')" style="margin-top: 1rem;">Join Group</button>
+                    </div>
+                    
+                    <div class="connected-card">
+                        <div class="connected-icon">👩</div>
+                        <h4>Women's Ministry</h4>
+                        <p>Empowering women through Bible study, prayer, and supportive fellowship. A safe place to grow and connect with other women.</p>
+                        <p><strong>When:</strong> Every Thursday, 2:00 PM - 5:30 PM</p>
+                        <p><strong>Where:</strong> Fellowship Hall</p>
+                        <button class="cta-button" onclick="joinGroup('Women\'s Ministry')" style="margin-top: 1rem;">Join Group</button>
+                    </div>
+                    
+                    <div class="connected-card">
+                        <div class="connected-icon">🧓</div>
+                        <h4>Senior Saints</h4>
+                        <p>Fellowship and Bible study specifically designed for our senior members. Come for wisdom, community, and spiritual encouragement.</p>
+                        <p><strong>When:</strong> Every Wednesday, 10:00 AM - 11:30 AM</p>
+                        <p><strong>Where:</strong> Fellowship Hall</p>
+                        <button class="cta-button" onclick="joinGroup('Senior Saints')" style="margin-top: 1rem;">Join Group</button>
+                    </div>
+                    
+                    <div class="connected-card">
+                        <div class="connected-icon">🎓</div>
+                        <h4>Young Adults</h4>
+                        <p>Connect with other young adults for Bible study, discussion, and social activities. Perfect for college students and young professionals.</p>
+                        <p><strong>When:</strong> Every Friday, 7:00 PM - 9:00 PM</p>
+                        <p><strong>Where:</strong> Youth Center</p>
+                        <button class="cta-button" onclick="joinGroup('Young Adults')" style="margin-top: 1rem;">Join Group</button>
+                    </div>
+                    
+                    <div class="connected-card">
+                        <div class="connected-icon">💑</div>
+                        <h4>Married Couples</h4>
+                        <p>Strengthen your marriage and connect with other couples through Biblical teaching and fellowship. Build lasting relationships.</p>
+                        <p><strong>When:</strong> Every Saturday, 3:00 PM - 5:00 PM</p>
+                        <p><strong>Where:</strong> Fellowship Hall</p>
+                        <button class="cta-button" onclick="joinGroup('Married Couples')" style="margin-top: 1rem;">Join Group</button>
+                    </div>
+                    
+                    <div class="connected-card">
+                        <div class="connected-icon">📖</div>
+                        <h4>Bible Study Group</h4>
+                        <p>Deep dive into Scripture with in-depth study and discussion. Perfect for those who want to grow in their understanding of God's Word.</p>
+                        <p><strong>When:</strong> Every Tuesday, 6:00 PM - 7:30 PM</p>
+                        <p><strong>Where:</strong> Main Sanctuary</p>
+                        <button class="cta-button" onclick="joinGroup('Bible Study Group')" style="margin-top: 1rem;">Join Group</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Volunteer Tab -->
+            <div id="volunteer-tab" class="tab-content">
+                <h3 style="text-align: center; margin-bottom: 2rem;">Serve With Us</h3>
+                <p style="text-align: center; max-width: 600px; margin: 0 auto 2rem;">Use your gifts and talents to make a difference. There's a place for you to serve!</p>
+                
+                <div class="connected-grid">
+                    <div class="connected-card">
+                        <div class="connected-icon">👋</div>
+                        <h4>Ushering Team</h4>
+                        <p>Help create a welcoming environment by greeting guests, handing out programs, and assisting with seating during services.</p>
+                        <p><strong>Time Commitment:</strong> One Sunday per month</p>
+                        <p><strong>Requirements:</strong> Friendly smile and servant heart</p>
+                        <button class="cta-button" onclick="signUpVolunteer('Ushering Team')" style="margin-top: 1rem;">Sign Up</button>
+                    </div>
+                    
+                    <div class="connected-card">
+                        <div class="connected-icon">🎵</div>
+                        <h4>Choir & Worship</h4>
+                        <p>Use your musical gifts to lead the congregation in worship. Vocalists and instrumentalists welcome!</p>
+                        <p><strong>Time Commitment:</strong> Weekly rehearsals + Sunday services</p>
+                        <p><strong>Requirements:</strong> Musical ability and heart for worship</p>
+                        <button class="cta-button" onclick="signUpVolunteer('Choir & Worship')" style="margin-top: 1rem;">Sign Up</button>
+                    </div>
+                    
+                    <div class="connected-card">
+                        <div class="connected-icon">📹</div>
+                        <h4>Media Team</h4>
+                        <p>Help with live streaming, sound, lighting, and presentation slides during services. No experience needed - we'll train you!</p>
+                        <p><strong>Time Commitment:</strong> One Sunday per month</p>
+                        <p><strong>Requirements:</strong> Willingness to learn technical skills</p>
+                        <button class="cta-button" onclick="signUpVolunteer('Media Team')" style="margin-top: 1rem;">Sign Up</button>
+                    </div>
+                    
+                    <div class="connected-card">
+                        <div class="connected-icon">👶</div>
+                        <h4>Children's Ministry</h4>
+                        <p>Invest in the next generation by teaching and caring for children during Sunday services. Background check required.</p>
+                        <p><strong>Time Commitment:</strong> One Sunday per month</p>
+                        <p><strong>Requirements:</strong> Love for children and patience</p>
+                        <button class="cta-button" onclick="signUpVolunteer('Children\'s Ministry')" style="margin-top: 1rem;">Sign Up</button>
+                    </div>
+                    
+                    <div class="connected-card">
+                        <div class="connected-icon">🌍</div>
+                        <h4>Outreach Team</h4>
+                        <p>Help us serve our community through various outreach projects, food distribution, and evangelism efforts.</p>
+                        <p><strong>Time Commitment:</strong> As needed for events</p>
+                        <p><strong>Requirements:</strong> Heart for serving others</p>
+                        <button class="cta-button" onclick="signUpVolunteer('Outreach Team')" style="margin-top: 1rem;">Sign Up</button>
+                    </div>
+                    
+                    <div class="connected-card">
+                        <div class="connected-icon">☕</div>
+                        <h4>Café Team</h4>
+                        <p>Prepare and serve coffee/tea before and after services. Help create a warm, welcoming atmosphere for fellowship.</p>
+                        <p><strong>Time Commitment:</strong> One Sunday per month</p>
+                        <p><strong>Requirements:</strong> Friendly and service-oriented</p>
+                        <button class="cta-button" onclick="signUpVolunteer('Café Team')" style="margin-top: 1rem;">Sign Up</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Newsletter Tab -->
+            <div id="newsletter-tab" class="tab-content">
+                <div class="newsletter-form">
+                    <div class="connected-icon" style="margin: 0 auto 1rem;">
+                        📰
+                    </div>
+                    <h3>Stay Connected</h3>
+                    <p>Get our weekly newsletter with upcoming events, sermon notes, and ministry updates delivered to your inbox.</p>
+                    
+                    <form id="newsletterForm" style="margin-top: 2rem;">
+                        <div class="form-group">
+                            <label for="newsletter-name">Your Name</label>
+                            <input type="text" id="newsletter-name" name="name" placeholder="Your full name" style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 1rem;">
+                        </div>
+                        
+                        <div class="newsletter-input-group">
+                            <input type="email" id="newsletter-email" name="email" placeholder="your.email@example.com" required>
+                            <button type="submit" class="cta-button">Subscribe</button>
+                        </div>
+                    </form>
+                    
+                    <div id="newsletter-success" class="success-message">
+                        Thank you for subscribing! Check your email for a welcome message.
+                    </div>
+                    
+                    <p style="margin-top: 2rem; font-size: 0.9rem; color: #666;">
+                        <strong>What you'll receive:</strong><br>
+                        • Weekly event announcements<br>
+                        • Sermon notes and discussion questions<br>
+                        • Ministry updates and testimonies<br>
+                        • Special event invitations
+                    </p>
+                </div>
+            </div>
+
+            <!-- Giving Tab -->
+            <div id="giving-tab" class="tab-content">
+                <h3 style="text-align: center; margin-bottom: 2rem;">Online Giving</h3>
+                <p style="text-align: center; max-width: 600px; margin: 0 auto 2rem;">Your generosity helps us fulfill our mission to reveal God's glory to our community and beyond. Thank you for your partnership!</p>
+                
+                <div class="giving-options">
+                    <div class="giving-card">
+                        <div class="giving-icon">📱</div>
+                        <h4>M-Pesa</h4>
+                        <p>Give securely using M-Pesa mobile money.</p>
+                        <p style="font-weight: bold; margin: 1rem 0;">Paybill: 123456</p>
+                        <p style="font-weight: bold;">Account: GIVING</p>
+                        <button class="cta-button" onclick="giveNow('M-Pesa')" style="margin-top: 1rem;">Give Now</button>
+                    </div>
+                    
+                    <div class="giving-card">
+                        <div class="giving-icon">🏦</div>
+                        <h4>Bank Transfer</h4>
+                        <p>Transfer directly to our church bank account.</p>
+                        <p style="font-weight: bold; margin: 1rem 0;">Bank: Kenya Commercial Bank</p>
+                        <p style="font-weight: bold;">Account: 0123456789</p>
+                        <button class="cta-button" onclick="giveNow('Bank Transfer')" style="margin-top: 1rem;">Give Now</button>
+                    </div>
+                    
+                    <div class="giving-card">
+                        <div class="giving-icon">💳</div>
+                        <h4>Card Payment</h4>
+                        <p>Give using your debit or credit card through our secure payment portal.</p>
+                        <p style="margin: 1rem 0;">Visa, Mastercard, and other major cards accepted.</p>
+                        <p style="color: var(--accent-color); font-weight: bold;">Secure & Encrypted</p>
+                        <button class="cta-button" onclick="giveNow('Card Payment')" style="margin-top: 1rem;">Give Now</button>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 3rem;">
+                    <h4>Where Your Giving Goes</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🏛️</div>
+                            <h5>Church Operations</h5>
+                            <p style="font-size: 0.9rem;">Facilities, utilities, and daily operations</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">👥</div>
+                            <h5>Staff Support</h5>
+                            <p style="font-size: 0.9rem;">Pastors and ministry team salaries</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🌍</div>
+                            <h5>Missions & Outreach</h5>
+                            <p style="font-size: 0.9rem;">Local and global mission initiatives</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎓</div>
+                            <h5>Ministries</h5>
+                            <p style="font-size: 0.9rem;">Children, youth, and adult programs</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Heavenly Glory Revelation Ministries</h3>
+                    <p>A place where faith comes alive and spirits are renewed through the revelation of God's heavenly glory.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">f</a>
+                        <a href="#" aria-label="Twitter">𝕏</a>
+                        <a href="#" aria-label="Instagram">📷</a>
+                        <a href="#" aria-label="YouTube">▶</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="sermons.html">Sermons</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p>📍 123 Church Street, Nairobi, KENYA</p>
+                    <p>📞 +254 720 224079</p>
+                    <p>✉️ info@heavenlyglory.org</p>
+                    <p>⏰ Office: Mon-Fri 9AM-5PM</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Service Times</h3>
+                    <p><strong>Sunday:</strong> 8:00 AM & 10:40 AM</p>
+                    <p><strong>TUE & FRI:</strong> 11:00 AM - 4:30 PM</p>
+                    <p><strong>Prayer Meeting:</strong> Daily</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Heavenly Glory Revelation Ministries. All rights reserved.</p>
+                <p>Created with <span style="color: var(--accent-color);">❤</span> by <span style="color: var(--accent-color); text-decoration: none;">Arneil Tech</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../js/script.js"></script>
+    <script>
+        // Tab switching functionality
+        function showTab(tabName) {
+            // Hide all tabs
+            const allTabs = document.querySelectorAll('.tab-content');
+            allTabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Remove active class from all buttons
+            const allButtons = document.querySelectorAll('.tab-button');
+            allButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // Show selected tab
+            document.getElementById(tabName + '-tab').classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        // Visitor form submission
+        document.getElementById('visitorForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const firstTime = formData.get('first-time');
+            
+            // Show success message
+            const successDiv = document.getElementById('visitor-success');
+            successDiv.style.display = 'block';
+            
+            // Show alert
+            if (firstTime === 'yes') {
+                alert(`Thank you for visiting Heavenly Glory, ${name}! We're so excited to have you join our church family. We'll send a welcome email to ${email} soon!`);
+            } else {
+                alert(`Welcome back to Heavenly Glory, ${name}! We're glad to see you again. We'll follow up with you at ${email}.`);
+            }
+            
+            // Reset form
+            this.reset();
+            
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+                successDiv.style.display = 'none';
+            }, 5000);
+        });
+
+        // Small group join functionality
+        function joinGroup(groupName) {
+            // Save to localStorage
+            const joinedGroups = JSON.parse(localStorage.getItem('joinedGroups') || '[]');
+            if (!joinedGroups.includes(groupName)) {
+                joinedGroups.push(groupName);
+                localStorage.setItem('joinedGroups', JSON.stringify(joinedGroups));
+            }
+            
+            alert(`You've successfully joined the ${groupName}! The group leader will contact you soon with more details. We're excited to have you join our community!`);
+        }
+
+        // Volunteer sign up functionality
+        function signUpVolunteer(role) {
+            // Save to localStorage
+            const volunteerRoles = JSON.parse(localStorage.getItem('volunteerRoles') || '[]');
+            if (!volunteerRoles.includes(role)) {
+                volunteerRoles.push(role);
+                localStorage.setItem('volunteerRoles', JSON.stringify(volunteerRoles));
+            }
+            
+            alert(`Thank you for signing up for the ${role}! Our volunteer coordinator will contact you within 48 hours with next steps. Your willingness to serve is a blessing to our church!`);
+        }
+
+        // Newsletter subscription
+        document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('newsletter-email').value;
+            const name = document.getElementById('newsletter-name').value;
+            
+            // Save to localStorage
+            const subscribers = JSON.parse(localStorage.getItem('newsletterSubscribers') || '[]');
+            if (!subscribers.find(sub => sub.email === email)) {
+                subscribers.push({ name, email, date: new Date().toISOString() });
+                localStorage.setItem('newsletterSubscribers', JSON.stringify(subscribers));
+            }
+            
+            // Show success message
+            const successDiv = document.getElementById('newsletter-success');
+            successDiv.style.display = 'block';
+            
+            // Show alert
+            alert(`Subscribed successfully! Welcome to our newsletter, ${name}. You'll receive our weekly updates at ${email}. Check your inbox for a welcome message!`);
+            
+            // Reset form
+            this.reset();
+            
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+                successDiv.style.display = 'none';
+            }, 5000);
+        });
+
+        // Online giving functionality
+        function giveNow(method) {
+            // Save to localStorage for tracking
+            const givingHistory = JSON.parse(localStorage.getItem('givingHistory') || '[]');
+            givingHistory.push({
+                method: method,
+                date: new Date().toISOString(),
+                status: 'initiated'
+            });
+            localStorage.setItem('givingHistory', JSON.stringify(givingHistory));
+            
+            if (method === 'M-Pesa') {
+                alert('Redirecting to secure M-Pesa payment... Please complete the payment on your phone. Thank you for your generosity!');
+            } else if (method === 'Bank Transfer') {
+                alert('Redirecting to secure banking portal... Thank you for your faithful giving! Your partnership helps us reach more people with God\'s love.');
+            } else if (method === 'Card Payment') {
+                alert('Redirecting to secure payment gateway... Your transaction is encrypted and secure. Thank you for supporting Heavenly Glory Ministries!');
+            }
+            
+            // In a real application, this would redirect to actual payment processing
+            console.log(`Payment initiated via ${method}`);
+        }
+
+        // Load saved data on page load (for demonstration)
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Newsletter subscribers:', JSON.parse(localStorage.getItem('newsletterSubscribers') || '[]'));
+            console.log('Joined groups:', JSON.parse(localStorage.getItem('joinedGroups') || '[]'));
+            console.log('Volunteer roles:', JSON.parse(localStorage.getItem('volunteerRoles') || '[]'));
+            console.log('Giving history:', JSON.parse(localStorage.getItem('givingHistory') || '[]'));
+        });
+    </script>
+</body>
+</html>
