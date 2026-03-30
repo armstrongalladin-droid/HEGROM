@@ -48,11 +48,17 @@
     <section class="sermons-section">
         <div class="container">
             <h2 class="section-title">Latest Sermons</h2>
-            <div class="filter-buttons" style="text-align: center; margin-bottom: 2rem;">
-                <button class="cta-button" onclick="filterYouTubeVideos('all')" style="background: var(--primary-color);">All Videos</button>
-                <button class="cta-button" onclick="filterYouTubeVideos('recent')" style="background: var(--accent-color);">Recent</button>
-                <button class="cta-button" onclick="filterYouTubeVideos('series')" style="background: var(--secondary-color);">Series</button>
+            
+            <!-- Search and Filter Section -->
+            <div style="max-width: 600px; margin: 0 auto 2rem auto; text-align: center;">
+                <input type="text" id="sermon-search" placeholder="Search sermons by title or topic..." style="width: 100%; padding: 1rem; border: 2px solid var(--accent-color); border-radius: 50px; font-size: 1rem; margin-bottom: 1rem;" onkeyup="searchSermons()">
+                <div class="filter-buttons" style="text-align: center; margin-bottom: 2rem;">
+                    <button class="cta-button" onclick="filterYouTubeVideos('all')" style="background: var(--primary-color);">All Videos</button>
+                    <button class="cta-button" onclick="filterYouTubeVideos('recent')" style="background: var(--accent-color);">Recent (30 days)</button>
+                    <button class="cta-button" onclick="filterYouTubeVideos('series')" style="background: var(--secondary-color);">Series</button>
+                </div>
             </div>
+            
             <div id="youtube-videos" class="sermons-grid">
                 <!-- YouTube videos will be dynamically inserted here -->
             </div>
@@ -146,6 +152,9 @@
         const YOUTUBE_API_KEY = 'AIzaSyBh8IXb4L1OZTOtvqiyPcDMfHgjk85Kosg';
         const YOUTUBE_CHANNEL_ID = 'UCtUa4bOfjimHwcfZ2SeRm2w';
         
+        // Store all videos for filtering
+        let allYouTubeVideos = [];
+        
         // YouTube Latest Videos functionality
         async function loadYouTubeVideos() {
             const container = document.getElementById('youtube-videos');
@@ -158,7 +167,8 @@
             error.style.display = 'none';
             
             try {
-                const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${YOUTUBE_CHANNEL_ID}&maxResults=6&order=date&type=video&key=${YOUTUBE_API_KEY}`;
+                // Fetch more videos (50 maximum)
+                const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${YOUTUBE_CHANNEL_ID}&maxResults=50&order=date&type=video&key=${YOUTUBE_API_KEY}`;
                 
                 const response = await fetch(url);
                 if (!response.ok) {
@@ -168,11 +178,13 @@
                 const data = await response.json();
                 
                 if (data.items && data.items.length > 0) {
+                    allYouTubeVideos = data.items;
                     displayYouTubeVideos(data.items);
                 } else {
                     showError();
                 }
             } catch (err) {
+                console.error('YouTube API Error:', err);
                 showError();
             } finally {
                 loading.style.display = 'none';
@@ -186,20 +198,32 @@
             videos.forEach(video => {
                 const videoId = video.id.videoId;
                 const title = video.snippet.title;
-                const thumbnail = video.snippet.thumbnails.medium.url;
-                const publishedAt = new Date(video.snippet.publishedAt).toLocaleDateString();
+                const description = video.snippet.description;
+                const thumbnail = video.snippet.thumbnails.high.url;
+                const publishedAt = new Date(video.snippet.publishedAt).toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                });
+                const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
                 
                 const videoCard = document.createElement('div');
                 videoCard.className = 'sermon-card';
+                videoCard.setAttribute('data-category', 'recent');
                 videoCard.innerHTML = `
                     <div class="sermon-date">${publishedAt}</div>
                     <div class="sermon-content">
-                        <div style="margin-bottom: 1rem;">
-                            <img src="${thumbnail}" alt="${title}" style="width: 100%; border-radius: 8px; cursor: pointer;" onclick="window.open('https://www.youtube.com/watch?v=${videoId}', '_blank')">
+                        <div style="margin-bottom: 1rem; position: relative;">
+                            <img src="${thumbnail}" alt="${title}" style="width: 100%; border-radius: 8px; cursor: pointer;" onclick="window.open('${videoUrl}', '_blank')">
+                            <div style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.8); color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem;">
+                                ▶️ Watch
+                            </div>
                         </div>
-                        <h3 style="margin-bottom: 0.5rem; font-size: 1.1rem; line-height: 1.4;">${title.length > 60 ? title.substring(0, 60) + '...' : title}</h3>
-                        <div style="margin-top: 1rem;">
-                            <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" class="sermon-link">▶️ Watch on YouTube</a>
+                        <h3 style="margin-bottom: 0.5rem; font-size: 1.1rem; line-height: 1.4;">${title.length > 80 ? title.substring(0, 80) + '...' : title}</h3>
+                        <p style="margin-bottom: 1rem; font-size: 0.9rem; color: #666; line-height: 1.4;">${description.length > 120 ? description.substring(0, 120) + '...' : description}</p>
+                        <div style="margin-top: 1rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                            <a href="${videoUrl}" target="_blank" class="sermon-link">▶️ Watch on YouTube</a>
+                            <a href="#" class="sermon-link" onclick="playYouTubeVideo('${videoId}', '${title.replace(/'/g, "\\'")}'); return false;">📺 Play Here</a>
                         </div>
                     </div>
                 `;
@@ -212,24 +236,74 @@
             document.getElementById('youtube-error').style.display = 'block';
         }
         
+        // Play YouTube video in modal
+        function playYouTubeVideo(videoId, title) {
+            const modal = document.getElementById('videoModal');
+            const titleElement = document.getElementById('videoTitle');
+            const frame = document.getElementById('videoFrame');
+            
+            titleElement.textContent = title;
+            frame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+            modal.style.display = 'flex';
+        }
+        
+        // Close video modal
+        function closeVideoModal() {
+            const modal = document.getElementById('videoModal');
+            const frame = document.getElementById('videoFrame');
+            
+            frame.src = '';
+            modal.style.display = 'none';
+        }
+        
+        // Enhanced filtering functionality
+        function filterYouTubeVideos(category) {
+            let filteredVideos = [...allYouTubeVideos];
+            
+            if (category === 'recent') {
+                // Show only videos from the last 30 days
+                const thirtyDaysAgo = new Date();
+                thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+                filteredVideos = filteredVideos.filter(video => 
+                    new Date(video.snippet.publishedAt) >= thirtyDaysAgo
+                );
+            } else if (category === 'series') {
+                // Filter videos that likely belong to a series (contain "part", "series", "episode", etc.)
+                filteredVideos = filteredVideos.filter(video => {
+                    const title = video.snippet.title.toLowerCase();
+                    const description = video.snippet.description.toLowerCase();
+                    return title.includes('part') || title.includes('series') || title.includes('episode') ||
+                           description.includes('part') || description.includes('series') || description.includes('episode');
+                });
+            }
+            
+            displayYouTubeVideos(filteredVideos);
+        }
+        
+        // Search functionality
+        function searchSermons() {
+            const searchTerm = document.getElementById('sermon-search').value.toLowerCase();
+            
+            if (searchTerm === '') {
+                displayYouTubeVideos(allYouTubeVideos);
+                return;
+            }
+            
+            const filteredVideos = allYouTubeVideos.filter(video => {
+                const title = video.snippet.title.toLowerCase();
+                const description = video.snippet.description.toLowerCase();
+                const tags = video.snippet.tags ? video.snippet.tags.join(' ').toLowerCase() : '';
+                
+                return title.includes(searchTerm) || 
+                       description.includes(searchTerm) || 
+                       tags.includes(searchTerm);
+            });
+            
+            displayYouTubeVideos(filteredVideos);
+        }
+        
         // Load YouTube videos when page loads
         document.addEventListener('DOMContentLoaded', loadYouTubeVideos);
-        
-        // YouTube filter functionality
-        function filterYouTubeVideos(category) {
-            const videoCards = document.querySelectorAll('#youtube-videos .sermon-card');
-            
-            videoCards.forEach(card => {
-                const cardCategory = card.getAttribute('data-category');
-                
-                if (category === 'all') {
-                    card.style.display = 'block';
-                    card.classList.add('fade-in');
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
         
         // Additional sermon page functionality
         function filterSermons(category) {
