@@ -106,43 +106,29 @@
         </div>
     </section>
 
-    <!-- Latest Sermon Preview -->
+    <!-- Featured Sermon Preview -->
     <section class="sermons-section">
         <div class="container">
-            <h2 class="section-title">Latest Sermon</h2>
-            <div class="sermons-grid">
-                <div class="sermon-card">
-                    <div class="sermon-date">March 24, 2024</div>
-                    <div class="sermon-content">
-                        <h3>The Revelation of God's Glory</h3>
-                        <p>Discover how God's heavenly glory is revealed in our daily lives and how we can walk in His divine presence.</p>
-                        <a href="sermons.html" class="sermon-link">Watch Full Sermon →</a>
-                    </div>
-                </div>
-                
-                <div class="sermon-card">
-                    <div class="sermon-date">March 17, 2024</div>
-                    <div class="sermon-content">
-                        <h3>Walking in Faith</h3>
-                        <p>Learn the principles of faith that move mountains and transform circumstances through God's power.</p>
-                        <a href="sermons.html" class="sermon-link">Watch Full Sermon →</a>
-                    </div>
-                </div>
-                
-                <div class="sermon-card">
-                    <div class="sermon-date">March 10, 2024</div>
-                    <div class="sermon-content">
-                        <h3>The Power of Prayer</h3>
-                        <p>Explore the transformative power of prayer and how it connects us to God's divine purpose.</p>
-                        <a href="sermons.html" class="sermon-link">Watch Full Sermon →</a>
-                    </div>
-                </div>
+            <h2 class="section-title">Featured Sermons</h2>
+            <div class="sermons-grid" id="featured-sermons">
+                <!-- Featured videos will be dynamically inserted here -->
             </div>
             <div style="text-align: center; margin-top: 2rem;">
                 <a href="sermons.html" class="cta-button">View All Sermons</a>
             </div>
         </div>
     </section>
+
+    <!-- Video Modal (Hidden by default) -->
+    <div id="videoModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; align-items: center; justify-content: center;">
+        <div style="background: white; padding: 2rem; border-radius: 10px; max-width: 800px; width: 90%; position: relative;">
+            <button onclick="closeVideoModal()" style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 2rem; cursor: pointer;">&times;</button>
+            <h3 id="videoTitle" style="margin-bottom: 1rem;"></h3>
+            <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                <iframe id="videoFrame" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" src="" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
 
     <!-- Call to Action Section -->
     <section class="contact-section">
@@ -209,5 +195,94 @@
 
     <!-- JavaScript -->
     <script src="js/script.js"></script>
+    <script>
+        // Featured sermons functionality
+        async function loadFeaturedSermons() {
+            const container = document.getElementById('featured-sermons');
+            
+            try {
+                // Fetch latest videos from your YouTube channel
+                const YOUTUBE_API_KEY = 'AIzaSyBh8IXb4L1OZTOtvqiyPcDMfHgjk85Kosg';
+                const YOUTUBE_CHANNEL_ID = 'UCtUa4bOfjimHwcfZ2SeRm2w';
+                
+                const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${YOUTUBE_CHANNEL_ID}&maxResults=6&order=date&type=video&key=${YOUTUBE_API_KEY}`;
+                
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error('API request failed');
+                }
+                
+                const data = await response.json();
+                
+                if (data.items && data.items.length > 0) {
+                    displayFeaturedSermons(data.items);
+                }
+            } catch (err) {
+                console.error('Error loading featured sermons:', err);
+                container.innerHTML = '<p style="text-align: center; color: #666;">Unable to load featured sermons.</p>';
+            }
+        }
+        
+        function displayFeaturedSermons(videos) {
+            const container = document.getElementById('featured-sermons');
+            container.innerHTML = '';
+            
+            videos.slice(0, 4).forEach(video => {
+                const videoId = video.id.videoId;
+                const title = video.snippet.title;
+                const thumbnail = video.snippet.thumbnails.medium.url;
+                const publishedAt = new Date(video.snippet.publishedAt).toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'short', 
+                    day: 'numeric' 
+                });
+                const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
+                
+                const sermonCard = document.createElement('div');
+                sermonCard.className = 'sermon-card';
+                sermonCard.innerHTML = `
+                    <div class="sermon-date">${publishedAt}</div>
+                    <div class="sermon-content">
+                        <div style="margin-bottom: 1rem; position: relative;">
+                            <img src="${thumbnail}" alt="${title}" style="width: 100%; border-radius: 8px; cursor: pointer;" onclick="window.open('${videoUrl}', '_blank')">
+                            <div style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.8); color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem;">
+                                ▶️ Watch
+                            </div>
+                        </div>
+                        <h3 style="margin-bottom: 0.5rem; font-size: 1.1rem; line-height: 1.4;">${title.length > 60 ? title.substring(0, 60) + '...' : title}</h3>
+                        <p style="margin-bottom: 1rem; font-size: 0.9rem; color: #666; line-height: 1.4;">Click to watch this powerful sermon on YouTube</p>
+                        <div style="margin-top: 1rem;">
+                            <a href="${videoUrl}" target="_blank" class="sermon-link">▶️ Watch Full Sermon →</a>
+                            <a href="#" class="sermon-link" onclick="playFeaturedVideo('${videoId}', '${title.replace(/'/g, "\\'")}'); return false;">📺 Watch Here</a>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(sermonCard);
+            });
+        }
+        
+        // Load featured sermons when page loads
+        document.addEventListener('DOMContentLoaded', loadFeaturedSermons);
+        
+        // Play featured video in modal
+        function playFeaturedVideo(videoId, title) {
+            const modal = document.getElementById('videoModal');
+            const titleElement = document.getElementById('videoTitle');
+            const frame = document.getElementById('videoFrame');
+            
+            titleElement.textContent = title;
+            frame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+            modal.style.display = 'flex';
+        }
+        
+        // Close video modal
+        function closeVideoModal() {
+            const modal = document.getElementById('videoModal');
+            const frame = document.getElementById('videoFrame');
+            
+            frame.src = '';
+            modal.style.display = 'none';
+        }
+    </script>
 </body>
 </html>

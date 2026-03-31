@@ -37,7 +37,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero-small">
         <div class="hero-content">
             <h1>Sermons & Messages</h1>
             <p>Powerful biblical teaching to inspire, challenge, and transform your life through God's Word</p>
@@ -195,7 +195,10 @@
             const container = document.getElementById('youtube-videos');
             container.innerHTML = '';
             
-            videos.forEach(video => {
+            // Skip first 2 videos to avoid duplication with index page
+            const videosToShow = videos.slice(2);
+            
+            videosToShow.forEach(video => {
                 const videoId = video.id.videoId;
                 const title = video.snippet.title;
                 const description = video.snippet.description;
