@@ -39,7 +39,7 @@
     <!-- Hero Section with Auto-Swiping Slider -->
     <section class="hero-slider">
         <!-- Slide 1: Original Hero -->
-        <div class="hero-slide active" style="background: linear-gradient(rgba(44, 62, 80, 0.7), rgba(142, 68, 173, 0.7)), url('Assets/images/Screenshot 2026-03-31 163226.png');">
+        <div class="hero-slide active" style="background-image: linear-gradient(rgba(44, 62, 80, 0.7), rgba(142, 68, 173, 0.7)), url('Assets/images/Screenshot 2026-03-31 163226.png');">
             <div class="hero-content">
                 <h1>Heavenly Glory Revelation Ministries</h1>
                 <p>Welcome to a place where faith comes alive and spirits are renewed through the revelation of God's heavenly glory</p>
@@ -48,7 +48,7 @@
         </div>
         
         <!-- Slide 2: Community of Faith -->
-        <div class="hero-slide" style="background: linear-gradient(rgba(44, 62, 80, 0.7), rgba(142, 68, 173, 0.7)), url('Assets/images/Screenshot 2026-03-31 235425.png');">
+        <div class="hero-slide" style="background-image: linear-gradient(rgba(44, 62, 80, 0.7), rgba(142, 68, 173, 0.7)), url('Assets/images/Screenshot 2026-03-31 235425.png');">
             <div class="hero-content">
                 <h1>Community of Faith</h1>
                 <p>Join our church family where we worship together, grow in faith, and support one another in love</p>
@@ -57,7 +57,7 @@
         </div>
         
         <!-- Slide 3: Service Times -->
-        <div class="hero-slide" style="background: linear-gradient(rgba(44, 62, 80, 0.7), rgba(142, 68, 173, 0.7)), url('Assets/images/Screenshot 2026-03-31 163226.png');">
+        <div class="hero-slide" style="background-image: linear-gradient(rgba(44, 62, 80, 0.7), rgba(142, 68, 173, 0.7)), url('Assets/images/Screenshot 2026-03-31 163226.png');">
             <div class="hero-content">
                 <h1>Service Times</h1>
                 <p>Sunday Worship: 9:00 AM | Bible Study: Wednesday 7:00 PM | Prayer Meeting: Friday 6:00 PM</p>
@@ -79,12 +79,12 @@
 
     <!-- Custom CSS for hero slider styling -->
     <style>
-        /* Hero Slider Styles */
+        /* Hero Slider Styles - FIXED */
         .hero-slider {
             position: relative;
             width: 100%;
-            height: 100vh;
-            overflow: hidden;
+            height: 100vh; /* Full screen height */
+            overflow: hidden; /* Prevent vertical flow */
         }
         
         .hero-slide {
@@ -92,35 +92,27 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
+            height: 100vh; /* Full screen height */
+            background-image: inherit; /* Inherit from inline style */
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat;
-            background-attachment: scroll;
+            background-attachment: scroll; /* Fixed for better performance */
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            color: var(--text-light);
-            opacity: 0;
-            transition: opacity 1.5s ease-in-out;
+            color: white; /* Changed to white for better visibility */
+            opacity: 0; /* Only active slide visible */
+            transition: opacity 1.5s ease-in-out; /* Smooth fade transition */
             transform: scale(1.0);
-        }
-        
-        .hero-slide::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.4);
-            z-index: 1;
+            z-index: 1; /* Stack properly */
         }
         
         .hero-slide.active {
-            opacity: 1;
-            transform: scale(1.0);
+            opacity: 1; /* Make active slide visible */
+            transform: scale(1.05); /* Subtle zoom effect */
+            z-index: 2; /* Active slide on top */
         }
         
         .slider-nav {
@@ -194,6 +186,7 @@
             margin-bottom: 1rem;
             font-weight: 700;
             letter-spacing: 1px;
+            color: white; /* Ensure white text */
             text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.9);
         }
         
@@ -201,6 +194,7 @@
             font-size: 1.2rem;
             margin-bottom: 2rem;
             line-height: 1.6;
+            color: white; /* Ensure white text */
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
         }
         
@@ -463,7 +457,7 @@
             slideInterval = setInterval(() => {
                 currentSlide = (currentSlide + 1) % totalSlides;
                 showSlide(currentSlide);
-            }, 7000); // Change every 7 seconds for better viewing
+            }, 5000); // Change every 5 seconds as requested
         }
         
         function stopAutoSlide() {
