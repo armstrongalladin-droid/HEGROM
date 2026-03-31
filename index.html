@@ -36,14 +36,234 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Heavenly Glory Revelation Ministries</h1>
-            <p>Welcome to a place where faith comes alive and spirits are renewed through the revelation of God's heavenly glory</p>
-            <a href="#about" class="cta-button">Join Us This Sunday</a>
+    <!-- Hero Section with Auto-Swiping Slider -->
+    <section class="hero-slider">
+        <!-- Slide 1: Original Hero -->
+        <div class="hero-slide active" style="background: linear-gradient(rgba(44, 62, 80, 0.7), rgba(142, 68, 173, 0.7)), url('Assets/images/Screenshot 2026-03-31 163226.png');">
+            <div class="hero-content">
+                <h1>Heavenly Glory Revelation Ministries</h1>
+                <p>Welcome to a place where faith comes alive and spirits are renewed through the revelation of God's heavenly glory</p>
+                <a href="#about" class="cta-button">Join Us This Sunday</a>
+            </div>
         </div>
+        
+        <!-- Slide 2: Community of Faith -->
+        <div class="hero-slide" style="background: linear-gradient(rgba(44, 62, 80, 0.7), rgba(142, 68, 173, 0.7)), url('Assets/images/Screenshot 2026-03-31 235425.png');">
+            <div class="hero-content">
+                <h1>Community of Faith</h1>
+                <p>Join our church family where we worship together, grow in faith, and support one another in love</p>
+                <a href="#about" class="cta-button">Join Our Worship</a>
+            </div>
+        </div>
+        
+        <!-- Slide 3: Service Times -->
+        <div class="hero-slide" style="background: linear-gradient(rgba(44, 62, 80, 0.7), rgba(142, 68, 173, 0.7)), url('Assets/images/Screenshot 2026-03-31 163226.png');">
+            <div class="hero-content">
+                <h1>Service Times</h1>
+                <p>Sunday Worship: 9:00 AM | Bible Study: Wednesday 7:00 PM | Prayer Meeting: Friday 6:00 PM</p>
+                <a href="#events" class="cta-button">View Full Schedule</a>
+            </div>
+        </div>
+        
+        <!-- Slider Navigation -->
+        <div class="slider-nav">
+            <button class="nav-dot active" onclick="goToSlide(0)"></button>
+            <button class="nav-dot" onclick="goToSlide(1)"></button>
+            <button class="nav-dot" onclick="goToSlide(2)"></button>
+        </div>
+        
+        <!-- Slider Controls -->
+        <button class="slider-prev" onclick="changeSlide(-1)">‹</button>
+        <button class="slider-next" onclick="changeSlide(1)">›</button>
     </section>
+
+    <!-- Custom CSS for hero slider styling -->
+    <style>
+        /* Hero Slider Styles */
+        .hero-slider {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: scroll;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--text-light);
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            transform: scale(1.0);
+        }
+        
+        .hero-slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+        
+        .hero-slide.active {
+            opacity: 1;
+            transform: scale(1.0);
+        }
+        
+        .slider-nav {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 10;
+        }
+        
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid var(--text-light);
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-dot.active {
+            background: var(--text-light);
+            transform: scale(1.2);
+        }
+        
+        .nav-dot:hover {
+            background: rgba(255, 255, 255, 0.6);
+        }
+        
+        .slider-prev, .slider-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            color: var(--text-light);
+            border: none;
+            padding: 15px 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        
+        .slider-prev {
+            left: 20px;
+        }
+        
+        .slider-next {
+            right: 20px;
+        }
+        
+        .slider-prev:hover, .slider-next:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        /* Hero Content Animation */
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1s ease;
+            max-width: 800px;
+            padding: 2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+        
+        .hero-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.9);
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+        
+        .cta-button {
+            background: var(--accent-color);
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .cta-button:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+        
+        @media (max-width: 768px) {
+            .hero-slide {
+                background-attachment: scroll;
+                background-size: cover;
+                background-position: center;
+            }
+            
+            .hero-content h1 {
+                font-size: 1.8rem;
+                line-height: 1.2;
+            }
+            
+            .hero-content p {
+                font-size: 0.9rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .slider-nav {
+                bottom: 20px;
+            }
+            
+            .slider-prev, .slider-next {
+                padding: 10px 15px;
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 1.5rem;
+            }
+            
+            .hero-content p {
+                font-size: 0.8rem;
+            }
+            
+            .cta-button {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
 
     <!-- About Section -->
     <section id="about" class="about-section">
@@ -56,7 +276,7 @@
                     <p>Founded on the principles of love, service, and worship, we strive to be a beacon of hope and light in our community, transforming lives through the power of God's word and the presence of the Holy Spirit.</p>
                 </div>
                 <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Church Community" style="width: 100%; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                    <img src="Assets/images/Screenshot 2026-03-31 235425.png" alt="Church Community" style="width: 100%; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
                 </div>
             </div>
         </div>
@@ -196,6 +416,100 @@
     <!-- JavaScript -->
     <script src="js/script.js"></script>
     <script>
+        // Hero Slider Functionality
+        let currentSlide = 0;
+        let slideInterval;
+        const slides = document.querySelectorAll('.hero-slide');
+        const totalSlides = slides.length;
+        
+        function showSlide(index) {
+            // Hide all slides
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+            });
+            
+            // Show current slide
+            slides[index].classList.add('active');
+            
+            // Update navigation dots
+            updateDots(index);
+        }
+        
+        function updateDots(activeIndex) {
+            const dots = document.querySelectorAll('.nav-dot');
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === activeIndex);
+            });
+        }
+        
+        function goToSlide(index) {
+            currentSlide = index;
+            showSlide(index);
+            resetAutoSlide();
+        }
+        
+        function changeSlide(direction) {
+            currentSlide += direction;
+            
+            // Wrap around if at ends
+            if (currentSlide < 0) currentSlide = totalSlides - 1;
+            if (currentSlide >= totalSlides) currentSlide = 0;
+            
+            showSlide(currentSlide);
+            resetAutoSlide();
+        }
+        
+        function startAutoSlide() {
+            slideInterval = setInterval(() => {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                showSlide(currentSlide);
+            }, 7000); // Change every 7 seconds for better viewing
+        }
+        
+        function stopAutoSlide() {
+            if (slideInterval) {
+                clearInterval(slideInterval);
+            }
+        }
+        
+        function resetAutoSlide() {
+            stopAutoSlide();
+            startAutoSlide();
+        }
+        
+        // Pause on hover
+        const heroSlider = document.querySelector('.hero-slider');
+        heroSlider.addEventListener('mouseenter', stopAutoSlide);
+        heroSlider.addEventListener('mouseleave', startAutoSlide);
+        
+        // Touch/swipe support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        heroSlider.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+        });
+        
+        heroSlider.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].clientX;
+            const diff = touchStartX - touchEndX;
+            
+            if (diff > 50) {
+                changeSlide(-1); // Swipe left - previous slide
+            } else if (diff < -50) {
+                changeSlide(1);  // Swipe right - next slide
+            }
+        });
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') changeSlide(-1);
+            if (e.key === 'ArrowRight') changeSlide(1);
+        });
+        
+        // Start auto-slide on page load
+        startAutoSlide();
+        
         // Featured sermons functionality
         async function loadFeaturedSermons() {
             const container = document.getElementById('featured-sermons');
@@ -253,16 +567,13 @@
                         <p style="margin-bottom: 1rem; font-size: 0.9rem; color: #666; line-height: 1.4;">Click to watch this powerful sermon on YouTube</p>
                         <div style="margin-top: 1rem;">
                             <a href="${videoUrl}" target="_blank" class="sermon-link">▶️ Watch Full Sermon →</a>
-                            <a href="#" class="sermon-link" onclick="playFeaturedVideo('${videoId}', '${title.replace(/'/g, "\\'")}'); return false;">📺 Watch Here</a>
+                            <a href="#" class="sermon-link" onclick="playFeaturedVideo('${videoId}', '${title.replace(/'/g, "\\\'")}'); return false;">📺 Watch Here</a>
                         </div>
                     </div>
                 `;
                 container.appendChild(sermonCard);
             });
         }
-        
-        // Load featured sermons when page loads
-        document.addEventListener('DOMContentLoaded', loadFeaturedSermons);
         
         // Play featured video in modal
         function playFeaturedVideo(videoId, title) {
@@ -283,6 +594,9 @@
             frame.src = '';
             modal.style.display = 'none';
         }
+        
+        // Load featured sermons when page loads
+        document.addEventListener('DOMContentLoaded', loadFeaturedSermons);
     </script>
 </body>
 </html>
