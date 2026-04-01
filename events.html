@@ -9,6 +9,173 @@
     
     <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Modern Footer Color Scheme */
+        footer {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%) !important;
+            color: #e8e8e8 !important;
+            border-top: 3px solid #f39c12 !important;
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(243, 156, 18, 0.3), transparent);
+        }
+        
+        .footer-section h3 {
+            color: #ffffff !important;
+            font-size: 1.4rem !important;
+            margin-bottom: 1.2rem !important;
+            font-weight: 700 !important;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: #f39c12;
+        }
+        
+        .footer-section p {
+            color: #b8b8b8 !important;
+            font-size: 1rem !important;
+            line-height: 1.7 !important;
+            margin-bottom: 1rem !important;
+        }
+        
+        .footer-section ul {
+            list-style: none !important;
+            padding: 0 !important;
+        }
+        
+        .footer-section li {
+            margin-bottom: 0.8rem !important;
+        }
+        
+        .footer-section a {
+            color: #e8e8e8 !important;
+            text-decoration: none !important;
+            font-size: 1rem !important;
+            transition: all 0.3s ease !important;
+            position: relative;
+        }
+        
+        .footer-section a:hover {
+            color: #f39c12 !important;
+            transform: translateX(3px);
+        }
+        
+        .footer-section a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #f39c12;
+            transition: width 0.3s ease;
+        }
+        
+        .footer-section a:hover::after {
+            width: 100%;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(243, 156, 18, 0.2) !important;
+            margin-top: 2.5rem !important;
+            padding-top: 1.5rem !important;
+            text-align: center !important;
+            background: rgba(0, 0, 0, 0.2);
+        }
+        
+        .footer-bottom p {
+            color: #b8b8b8 !important;
+            font-size: 0.9rem !important;
+            margin-bottom: 0.5rem !important;
+        }
+        
+        .social-links {
+            margin-top: 1.5rem !important;
+        }
+        
+        .social-links a {
+            display: inline-block !important;
+            width: 44px !important;
+            height: 44px !important;
+            line-height: 44px !important;
+            text-align: center !important;
+            background: rgba(255, 255, 255, 0.1) !important;
+            color: #ffffff !important;
+            border-radius: 50% !important;
+            margin-right: 0.8rem !important;
+            transition: all 0.3s ease !important;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .social-links a:hover {
+            background: #f39c12 !important;
+            transform: translateY(-3px) !important;
+            box-shadow: 0 5px 15px rgba(243, 156, 18, 0.3) !important;
+        }
+        
+        .social-links a svg {
+            width: 18px !important;
+            height: 18px !important;
+            fill: currentColor !important;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            footer {
+                padding: 2rem 0 !important;
+            }
+            
+            .footer-section h3 {
+                font-size: 1.2rem !important;
+                margin-bottom: 1rem !important;
+            }
+            
+            .footer-section p {
+                font-size: 0.9rem !important;
+            }
+            
+            .social-links a {
+                width: 38px !important;
+                height: 38px !important;
+                line-height: 38px !important;
+                margin-right: 0.5rem !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .footer-content {
+                text-align: center !important;
+            }
+            
+            .footer-section {
+                margin-bottom: 2rem !important;
+            }
+            
+            .footer-section h3::after {
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+            }
+        }
+    </style>
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="Assets/images/favicon.ico">
@@ -167,15 +334,15 @@
                 
                 <div class="event-card" data-event-type="outreach">
                     <div class="event-date">
-                        <span class="day">Dates Coming Soon</span>
-                        <span class="month"></span>
+                        <span class="day">11th</span>
+                        <span class="month">April</span>
                     </div>
                     <div class="event-content">
                         <h3>Community Outreach Day</h3>
                         <p>Join us as we serve our community through various outreach projects including food distribution, neighborhood cleanup, and prayer walks.</p>
                         <div class="event-time">🕘 9:00 AM - 1:00 PM</div>
-                        <div class="event-time">📍 Various Locations</div>
-                        <div class="event-time">🎫 Free | Volunteers Needed</div>
+                        <div class="event-time">📍Children's Home </div>
+                        <div class="event-time">🎫 Clothes and financial support is very much needed  | Volunteers Needed</div>
                     </div>
                 </div>
                 
@@ -314,10 +481,20 @@
                     <h3>Heavenly Glory Revelation Ministries</h3>
                     <p>A place where faith comes alive and spirits are renewed through the revelation of God's heavenly glory.</p>
                     <div class="social-links">
-                        <a href="#" aria-label="Facebook">f</a>
+                        <a href="https://www.facebook.com/BishopMuriithiNjiiri" aria-label="Facebook" target="_blank">f</a>
                         <a href="#" aria-label="Twitter">𝕏</a>
-                        <a href="#" aria-label="Instagram">📷</a>
-                        <a href="#" aria-label="YouTube">▶</a>
+                        <a href="https://instagram.com/hgrmkenya" aria-label="Instagram" target="_blank">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" fill="white"/>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.youtube.com/@MichaelMuriithi-y5u" aria-label="YouTube" target="_blank">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
+                        </a>
                     </div>
                 </div>
                 
@@ -343,14 +520,14 @@
                 <div class="footer-section">
                     <h3>Service Times</h3>
                     <p><strong>Sunday:</strong> 8:00 AM & 10:40 AM</p>
-                    <p><strong>TUE & FRI:</strong> 11:00 AM - 4:30 PM</p>
+                    <p><strong>Tue & Fri:</strong> 11:00 AM - 4:30 PM</p>
                     <p><strong>Prayer Meeting:</strong> Daily</p>
                 </div>
             </div>
             
             <div class="footer-bottom">
                 <p>&copy; 2024 Heavenly Glory Revelation Ministries. All rights reserved.</p>
-                <p>Created with <span style="color: var(--accent-color);">❤</span> by <span style="color: var(--accent-color); text-decoration: none;">Arneil Tech</span></p>
+                <p><span style="color: var(--accent-color);">Crafted and developed by </span><span style="color: var(--accent-color); text-decoration: none;">Arneil Tech</span></p>
             </div>
         </div>
     </footer>

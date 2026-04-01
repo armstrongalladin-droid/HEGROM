@@ -1,0 +1,35 @@
+{
+  "rewrites": [
+    {
+      "source": "/sermons.html",
+      "destination": "/sermons"
+    },
+    {
+      "source": "/pages/(.*)",
+      "destination": "/$1"
+    },
+    {
+      "source": "/css/(.*)",
+      "destination": "/css/$1"
+    },
+    {
+      "source": "/Assets/(.*)",
+      "destination": "/Assets/$1"
+    },
+    {
+      "source": "/js/(.*)",
+      "destination": "/js/$1"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        }
+      ]
+    }
+  ]
+}

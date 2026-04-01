@@ -9,6 +9,173 @@
     
     <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Modern Footer Color Scheme */
+        footer {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%) !important;
+            color: #e8e8e8 !important;
+            border-top: 3px solid #f39c12 !important;
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(243, 156, 18, 0.3), transparent);
+        }
+        
+        .footer-section h3 {
+            color: #ffffff !important;
+            font-size: 1.4rem !important;
+            margin-bottom: 1.2rem !important;
+            font-weight: 700 !important;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: #f39c12;
+        }
+        
+        .footer-section p {
+            color: #b8b8b8 !important;
+            font-size: 1rem !important;
+            line-height: 1.7 !important;
+            margin-bottom: 1rem !important;
+        }
+        
+        .footer-section ul {
+            list-style: none !important;
+            padding: 0 !important;
+        }
+        
+        .footer-section li {
+            margin-bottom: 0.8rem !important;
+        }
+        
+        .footer-section a {
+            color: #e8e8e8 !important;
+            text-decoration: none !important;
+            font-size: 1rem !important;
+            transition: all 0.3s ease !important;
+            position: relative;
+        }
+        
+        .footer-section a:hover {
+            color: #f39c12 !important;
+            transform: translateX(3px);
+        }
+        
+        .footer-section a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #f39c12;
+            transition: width 0.3s ease;
+        }
+        
+        .footer-section a:hover::after {
+            width: 100%;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(243, 156, 18, 0.2) !important;
+            margin-top: 2.5rem !important;
+            padding-top: 1.5rem !important;
+            text-align: center !important;
+            background: rgba(0, 0, 0, 0.2);
+        }
+        
+        .footer-bottom p {
+            color: #b8b8b8 !important;
+            font-size: 0.9rem !important;
+            margin-bottom: 0.5rem !important;
+        }
+        
+        .social-links {
+            margin-top: 1.5rem !important;
+        }
+        
+        .social-links a {
+            display: inline-block !important;
+            width: 44px !important;
+            height: 44px !important;
+            line-height: 44px !important;
+            text-align: center !important;
+            background: rgba(255, 255, 255, 0.1) !important;
+            color: #ffffff !important;
+            border-radius: 50% !important;
+            margin-right: 0.8rem !important;
+            transition: all 0.3s ease !important;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .social-links a:hover {
+            background: #f39c12 !important;
+            transform: translateY(-3px) !important;
+            box-shadow: 0 5px 15px rgba(243, 156, 18, 0.3) !important;
+        }
+        
+        .social-links a svg {
+            width: 18px !important;
+            height: 18px !important;
+            fill: currentColor !important;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            footer {
+                padding: 2rem 0 !important;
+            }
+            
+            .footer-section h3 {
+                font-size: 1.2rem !important;
+                margin-bottom: 1rem !important;
+            }
+            
+            .footer-section p {
+                font-size: 0.9rem !important;
+            }
+            
+            .social-links a {
+                width: 38px !important;
+                height: 38px !important;
+                line-height: 38px !important;
+                margin-right: 0.5rem !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .footer-content {
+                text-align: center !important;
+            }
+            
+            .footer-section {
+                margin-bottom: 2rem !important;
+            }
+            
+            .footer-section h3::after {
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+            }
+        }
+    </style>
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="Assets/images/favicon.ico">
@@ -540,7 +707,20 @@
         <div class="container">
             <h2 class="section-title">Featured Sermons</h2>
             <div class="sermons-grid" id="featured-sermons">
-                <!-- Featured videos will be dynamically inserted here -->
+                <!-- Featured sermons will be dynamically loaded here -->
+            </div>
+            
+            <!-- Loading State -->
+            <div id="featured-loading" style="text-align: center; padding: 2rem;">
+                <div style="display: inline-block; padding: 1rem 2rem; background: var(--primary-color); color: white; border-radius: 10px;">
+                    Loading featured sermons...
+                </div>
+            </div>
+            
+            <!-- Error State -->
+            <div id="featured-error" style="text-align: center; padding: 2rem; display: none;">
+                <p style="color: var(--text-light);">Unable to load featured sermons.</p>
+                <button onclick="loadFeaturedSermons()" style="margin-top: 1rem; padding: 0.8rem 1.5rem; background: var(--accent-color); color: white; border: none; border-radius: 25px; cursor: pointer;">Retry</button>
             </div>
             <div style="text-align: center; margin-top: 2rem;">
                 <a href="sermons.html" class="cta-button">View All Sermons</a>
@@ -581,10 +761,20 @@
                     <h3>Heavenly Glory Revelation Ministries</h3>
                     <p>A place where faith comes alive and spirits are renewed through the revelation of God's heavenly glory.</p>
                     <div class="social-links">
-                        <a href="#" aria-label="Facebook">f</a>
+                        <a href="https://www.facebook.com/BishopMuriithiNjiiri" aria-label="Facebook" target="_blank">f</a>
                         <a href="#" aria-label="Twitter">𝕏</a>
-                        <a href="#" aria-label="Instagram">📷</a>
-                        <a href="#" aria-label="YouTube">▶</a>
+                        <a href="https://instagram.com/hgrmkenya" aria-label="Instagram" target="_blank">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" fill="white"/>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.youtube.com/@MichaelMuriithi-y5u" aria-label="YouTube" target="_blank">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
+                        </a>
                     </div>
                 </div>
                 
@@ -610,14 +800,14 @@
                 <div class="footer-section">
                     <h3>Service Times</h3>
                     <p><strong>Sunday:</strong> 8:00 AM & 10:40 AM</p>
-                    <p><strong>TUE & FRI:</strong> 11:00 AM - 4:30 PM</p>
+                    <p><strong>Tue & Fri:</strong> 11:00 AM - 4:30 PM</p>
                     <p><strong>Prayer Meeting:</strong> Daily</p>
                 </div>
             </div>
             
             <div class="footer-bottom">
                 <p>&copy; 2024 Heavenly Glory Revelation Ministries. All rights reserved.</p>
-                <p>Created with <span style="color: var(--accent-color);">❤</span> by <span style="color: var(--accent-color); text-decoration: none;">Arneil Tech</span></p>
+                <p><span style="color: var(--accent-color);">Crafted and developed by</span> <span style="color: var(--accent-color); text-decoration: none;">Arneil Tech</span></p>
             </div>
         </div>
     </footer>
@@ -741,41 +931,28 @@
         // Load featured sermons when page loads
         document.addEventListener('DOMContentLoaded', () => {
             animateMinistries();
-            loadFeaturedSermons(); // Load immediately when DOM is ready
+            loadFeaturedSermons();
+            console.log('Index page loaded successfully');
         });
         
-        // Featured sermons functionality
+        // YouTube API Configuration
+        const API_KEY = 'AIzaSyAFwyt7I_s4jXJo4DF4Xi-pzAHkVR3twKc';
+        const CHANNEL_ID = 'UCtUa4bOfjimHwcfZ2SeRm2w';
+        
+        // Function to load featured sermons
         async function loadFeaturedSermons() {
             const container = document.getElementById('featured-sermons');
-            
-            if (!container) {
-                console.error('Featured sermons container not found');
-                return;
-            }
+            const loading = document.getElementById('featured-loading');
+            const error = document.getElementById('featured-error');
             
             // Show loading state
-            container.innerHTML = '<div style="text-align: center; padding: 2rem;"><div style="display: inline-block; padding: 1rem 2rem; background: var(--primary-color); color: white; border-radius: 10px;">Loading sermons...</div></div>';
+            loading.style.display = 'block';
+            error.style.display = 'none';
+            container.innerHTML = '';
             
             try {
-                // Test API connectivity first
-                console.log('Testing YouTube API connectivity...');
-                
-                // YouTube API configuration
-                const YOUTUBE_API_KEY = 'AIzaSyBh8IXb4L1OZTOtvqiyPcDMfHgjk85Kosg';
-                const YOUTUBE_CHANNEL_ID = 'UCtUa4bOfjimHwcfZ2SeRm2w';
-                
-                // Test API key validity
-                console.log('API Key:', YOUTUBE_API_KEY);
-                console.log('Channel ID:', YOUTUBE_CHANNEL_ID);
-                
-                // Test URL construction
-                const testUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${YOUTUBE_CHANNEL_ID}&maxResults=1&order=date&type=video&key=${YOUTUBE_API_KEY}`;
-                console.log('Test URL:', testUrl);
-                
-                // Fetch latest videos from your YouTube channel
-                const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${YOUTUBE_CHANNEL_ID}&maxResults=6&order=date&type=video&key=${YOUTUBE_API_KEY}`;
-                
-                console.log('Fetching from URL:', url);
+                // Fetch sermons from YouTube API
+                const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${CHANNEL_ID}&maxResults=4&order=date&type=video&key=${API_KEY}`;
                 
                 const response = await fetch(url);
                 
@@ -784,180 +961,113 @@
                 }
                 
                 const data = await response.json();
-                console.log('API Response:', data);
                 
-                if (data.error) {
-                    throw new Error(`API Error: ${data.error.message}`);
+                // Check if we got sermons
+                if (data.items && data.items.length > 0) {
+                    displayFeaturedSermons(data.items);
+                } else {
+                    throw new Error('No sermons found');
                 }
-                
-                if (!data.items || data.items.length === 0) {
-                    container.innerHTML = '<p style="text-align: center; color: #666; padding: 2rem;">No sermons available at the moment.</p>';
-                    return;
-                }
-                
-                // Clear loading state and display sermons
-                container.innerHTML = '';
-                displayFeaturedSermons(data.items);
-                
-                console.log(`Successfully loaded ${data.items.length} sermons`);
                 
             } catch (err) {
                 console.error('Error loading featured sermons:', err);
-                console.log('Error details:', {
-                    message: err.message,
-                    stack: err.stack,
-                    timestamp: new Date().toISOString()
-                });
-                container.innerHTML = `<p style="text-align: center; color: #666; padding: 2rem;">Unable to load sermons: ${err.message || 'Unknown error'}</p><button onclick="loadFeaturedSermons()" style="margin-top: 1rem; padding: 0.5rem 1rem; background: var(--accent-color); color: white; border: none; border-radius: 5px; cursor: pointer;">Retry</button>`;
-                
-                // Retry mechanism
-                setTimeout(() => {
-                    console.log('Retrying sermon load...');
-                    loadFeaturedSermons();
-                }, 5000); // Retry after 5 seconds
+                showFeaturedError();
+            } finally {
+                // Hide loading state
+                loading.style.display = 'none';
             }
         }
         
-        function displayFeaturedSermons(videos) {
+        // Function to display featured sermons
+        function displayFeaturedSermons(sermons) {
             const container = document.getElementById('featured-sermons');
-            
-            if (!container) {
-                console.error('Featured sermons container not found');
-                return;
-            }
-            
             container.innerHTML = '';
             
-            if (!videos || videos.length === 0) {
-                container.innerHTML = '<p style="text-align: center; color: #666; padding: 2rem;">No sermons available.</p>';
-                return;
-            }
-            
-            // Safely slice array to prevent errors
-            const videosToShow = videos.slice(0, 4);
-            
-            videosToShow.forEach((video, index) => {
-                try {
-                    const videoId = video.id?.videoId;
-                    const title = video.snippet?.title || 'Untitled';
-                    const thumbnail = video.snippet?.thumbnails?.medium?.url || '';
-                    
-                    if (!videoId || !thumbnail) {
-                        console.warn(`Missing data for video at index ${index}`);
-                        return;
-                    }
-                    
-                    const publishedAt = new Date(video.snippet.publishedAt).toLocaleDateString('en-US', { 
-                        year: 'numeric', 
-                        month: 'short', 
-                        day: 'numeric' 
-                    });
-                    const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
-                    
-                    const sermonCard = document.createElement('div');
-                    sermonCard.className = 'sermon-card';
-                    
-                    // Sanitize title to prevent XSS
-                    const sanitizedTitle = title.replace(/[<>]/g, '');
-                    
-                    // Create date element
-                    const dateDiv = document.createElement('div');
-                    dateDiv.className = 'sermon-date';
-                    dateDiv.textContent = publishedAt;
-                    
-                    // Create content container
-                    const contentDiv = document.createElement('div');
-                    contentDiv.className = 'sermon-content';
-                    
-                    // Create image container
-                    const imageContainer = document.createElement('div');
-                    imageContainer.style.cssText = 'margin-bottom: 1rem; position: relative;';
-                    
-                    const img = document.createElement('img');
-                    img.src = thumbnail;
-                    img.alt = sanitizedTitle;
-                    img.style.cssText = 'width: 100%; border-radius: 8px; cursor: pointer;';
-                    img.onclick = () => window.open(videoUrl, '_blank');
-                    
-                    // Create watch overlay
-                    const overlay = document.createElement('div');
-                    overlay.style.cssText = 'position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.8); color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem;';
-                    overlay.textContent = '▶️ Watch';
-                    
-                    imageContainer.appendChild(img);
-                    imageContainer.appendChild(overlay);
-                    
-                    // Create title
-                    const titleEl = document.createElement('h3');
-                    titleEl.style.cssText = 'margin-bottom: 0.5rem; font-size: 1.1rem; line-height: 1.4;';
-                    titleEl.textContent = sanitizedTitle.length > 60 ? sanitizedTitle.substring(0, 60) + '...' : sanitizedTitle;
-                    
-                    // Create description
-                    const descEl = document.createElement('p');
-                    descEl.style.cssText = 'margin-bottom: 1rem; font-size: 0.9rem; color: #666; line-height: 1.4;';
-                    descEl.textContent = 'Click to watch this powerful sermon on YouTube';
-                    
-                    // Create links container
-                    const linksContainer = document.createElement('div');
-                    linksContainer.style.cssText = 'margin-top: 1rem;';
-                    
-                    // Create watch link
-                    const watchLink = document.createElement('a');
-                    watchLink.href = videoUrl;
-                    watchLink.target = '_blank';
-                    watchLink.className = 'sermon-link';
-                    watchLink.textContent = '▶️ Watch Full Sermon →';
-                    
-                    // Create modal link
-                    const modalLink = document.createElement('a');
-                    modalLink.href = '#';
-                    modalLink.className = 'sermon-link';
-                    modalLink.textContent = '📺 Watch Here';
-                    modalLink.onclick = () => playFeaturedVideo(videoId, sanitizedTitle.replace(/'/g, "\\\'"));
-                    modalLink.onclick = () => false;
-                    
-                    // Assemble card
-                    linksContainer.appendChild(watchLink);
-                    linksContainer.appendChild(modalLink);
-                    
-                    contentDiv.appendChild(titleEl);
-                    contentDiv.appendChild(descEl);
-                    contentDiv.appendChild(linksContainer);
-                    
-                    sermonCard.appendChild(dateDiv);
-                    sermonCard.appendChild(imageContainer);
-                    sermonCard.appendChild(contentDiv);
-                    
-                    container.appendChild(sermonCard);
-                    
-                } catch (error) {
-                    console.error(`Error creating sermon card ${index}:`, error);
-                }
+            sermons.forEach(sermon => {
+                const sermonCard = createFeaturedSermonCard(sermon);
+                container.appendChild(sermonCard);
             });
         }
         
-        // Play featured video in modal
-        function playFeaturedVideo(videoId, title) {
-            const modal = document.getElementById('videoModal');
-            const titleElement = document.getElementById('videoTitle');
-            const frame = document.getElementById('videoFrame');
+        // Function to create a featured sermon card
+        function createFeaturedSermonCard(sermon) {
+            const videoId = sermon.id.videoId;
+            const title = sermon.snippet.title;
+            const thumbnail = sermon.snippet.thumbnails.medium.url;
+            const publishedAt = new Date(sermon.snippet.publishedAt).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+            });
+            const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
             
-            titleElement.textContent = title;
-            frame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-            modal.style.display = 'flex';
+            // Create card element
+            const card = document.createElement('div');
+            card.className = 'sermon-card';
+            card.style.cssText = `
+                background: var(--white);
+                border-radius: 15px;
+                overflow: hidden;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s ease;
+            `;
+            
+            // Add hover effect
+            card.onmouseover = () => card.style.transform = 'translateY(-5px)';
+            card.onmouseout = () => card.style.transform = 'translateY(0)';
+            
+            // Card content
+            card.innerHTML = `
+                <div style="position: relative;">
+                    <img src="${thumbnail}" alt="${title}" style="width: 100%; height: 200px; object-fit: cover; cursor: pointer;" onclick="window.open('${videoUrl}', '_blank')">
+                    <div style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.8); color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem;">
+                        ▶️ Watch
+                    </div>
+                </div>
+                <div style="padding: 1.5rem;">
+                    <h3 style="margin-bottom: 0.5rem; font-size: 1.1rem; color: var(--primary-color); line-height: 1.4;">${truncateText(title, 60)}</h3>
+                    <p style="margin-bottom: 1rem; font-size: 0.9rem; color: var(--text-light);">📅 ${publishedAt}</p>
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                        <a href="${videoUrl}" target="_blank" class="sermon-link" style="background: var(--primary-color); color: white; padding: 0.8rem 1.2rem; border-radius: 25px; text-decoration: none; font-size: 0.9rem; transition: background 0.3s ease;" onmouseover="this.style.background='var(--accent-color)'" onmouseout="this.style.background='var(--primary-color)'">▶️ Watch</a>
+                        <a href="#" onclick="playFeaturedVideo('${videoId}', '${title.replace(/'/g, "\\\'")}'); return false;" class="sermon-link" style="background: var(--secondary-color); color: white; padding: 0.8rem 1.2rem; border-radius: 25px; text-decoration: none; font-size: 0.9rem; transition: background 0.3s ease;" onmouseover="this.style.background='var(--accent-color)'" onmouseout="this.style.background='var(--secondary-color)'">📺 Play Here</a>
+                    </div>
+                </div>
+            `;
+            
+            return card;
         }
         
-        // Close video modal
+        // Helper function to truncate text
+        function truncateText(text, maxLength) {
+            if (text.length <= maxLength) return text;
+            return text.substring(0, maxLength) + '...';
+        }
+        
+        // Function to show error
+        function showFeaturedError() {
+            const error = document.getElementById('featured-error');
+            error.style.display = 'block';
+        }
+        
+        // Simple modal functionality (kept for potential future use)
+        function playFeaturedVideo(videoId, title) {
+            console.log('Modal functionality disabled - using static content');
+        }
+        
         function closeVideoModal() {
             const modal = document.getElementById('videoModal');
-            const frame = document.getElementById('videoFrame');
-            
-            frame.src = '';
-            modal.style.display = 'none';
+            if (modal) {
+                modal.style.display = 'none';
+            }
         }
         
-        // Load featured sermons when page loads
-        document.addEventListener('DOMContentLoaded', loadFeaturedSermons);
+        // Close modal when clicking outside
+        document.addEventListener('click', function(e) {
+            const modal = document.getElementById('videoModal');
+            if (modal && e.target === modal) {
+                closeVideoModal();
+            }
+        });
     </script>
 </body>
 </html>
